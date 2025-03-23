@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Schedule Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+    
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: #2980b9;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+      font-weight: 600;
+    }
+    
+    .subject-input {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    
+    .subject-input input {
+      flex: 3;
+      margin-right: 10px;
+    }
+    
+    .subject-input input:last-child {
+      flex: 1;
+    }
+    
+    .remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
+      margin-left: 10px;
+      width: auto;
+    }
+    
+    .add-btn {
+      background-color: #2ecc71;
+      margin-bottom: 20px;
+    }
+    
+    .options {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .options > div {
+      flex: 1;
+    }
+    
+    @media print {
+      .container:first-child {
+        display: none;
+      }
+      
+      body {
+        padding: 0;
+        background-color: white;
+      }
+      
+      .container {
+        box-shadow: none;
+        padding: 0;
+      }
+    }
+    
+    .print-btn {
+      background-color: #9b59b6;
+      margin-top: 20px;
+    }
+    
+    .error {
+      color: #e74c3c;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class Schedule Generator</h1>
+  
+  <div class="container">
+    <div class="options">
+      <div class="form-group">
+        <label for="dayStart">Start Time:</label>
+        <input type="time" id="dayStart" value="08:00">
+      </div>
+      <div class="form-group">
+        <label for="dayEnd">End Time:</label>
+        <input type="time" id="dayEnd" value="16:00">
+      </div>
+      <div class="form-group">
+        <label for="classDuration">Class Duration (minutes):</label>
+        <input type="number" id="classDuration" min="30" step="5" value="50">
+      </div>
+      <div class="form-group">
+        <label for="breakDuration">Break Duration (minutes):</label>
+        <input type="number" id="breakDuration" min="5" step="5" value="10">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Subjects and Weekly Classes:</label>
+      <div id="subjects-container">
+        <div class="subject-input">
+          <input type="text" placeholder="Subject Name" class="subject-name">
+          <input type="number" placeholder="Classes per week" class="classes-per-week" min="1" max="10" value="3">
+          <button class="remove-btn">×</button>
+        </div>
+      </div>
+      <button class="add-btn" id="add-subject">+ Add Subject</button>
+    </div>
+    
+    <div class="form-group">
+      <label for="days">Working Days:</label>
+      <div id="days-container">
+        <input type="checkbox" id="monday" name="days" value="Monday" checked>
+        <label for="monday">Monday</label>
+        
+        <input type="checkbox" id="tuesday" name="days" value="Tuesday" checked>
+        <label for="tuesday">Tuesday</label>
+        
+        <input type="checkbox" id="wednesday" name="days" value="Wednesday" checked>
+        <label for="wednesday">Wednesday</label>
+        
+        <input type="checkbox" id="thursday" name="days" value="Thursday" checked>
+        <label for="thursday">Thursday</label>
+        
+        <input type="checkbox" id="friday" name="days" value="Friday" checked>
+        <label for="friday">Friday</label>
+        
+        <input type="checkbox" id="saturday" name="days" value="Saturday">
+        <label for="saturday">Saturday</label>
+      </div>
+    </div>
+    
+    <button id="generate-btn">Generate Schedule</button>
+    <div id="error-message" class="error"></div>
+  </div>
+  
+  <div class="container" id="schedule-container" style="display: none;">
+    <h2>Weekly Class Schedule</h2>
+    <div id="schedule-output"></div>
+    <button class="print-btn" id="print-btn">Print Schedule</button>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // DOM elements
+      const addSubjectBtn = document.getElementById('add-subject');
+      const subjectsContainer = document.getElementById('subjects-container');
+      const generateBtn = document.getElementById('generate-btn');
+      const scheduleOutput = document.getElementById('schedule-output');
+      const scheduleContainer = document.getElementById('schedule-container');
+      const printBtn = document.getElementById('print-btn');
+      const errorMessage = document.getElementById('error-message');
+      
+      // Add subject input
+      addSubjectBtn.addEventListener('click', function() {
+        const subjectInput = document.createElement('div');
+        subjectInput.className = 'subject-input';
+        subjectInput.innerHTML = `
+          <input type="text" placeholder="Subject Name" class="subject-name">
+          <input type="number" placeholder="Classes per week" class="classes-per-week" min="1" max="10" value="3">
+          <button class="remove-btn">×</button>
+        `;
+        subjectsContainer.appendChild(subjectInput);
+        
+        // Add event listener to the new remove button
+        const removeBtn = subjectInput.querySelector('.remove-btn');
+        removeBtn.addEventListener('click', function() {
+          subjectsContainer.removeChild(subjectInput);
+        });
+      });
+      
+      // Add event listener to the first remove button
+      const firstRemoveBtn = document.querySelector('.remove-btn');
+      firstRemoveBtn.addEventListener('click', function() {
+        const subjectInputs = document.querySelectorAll('.subject-input');
+        if (subjectInputs.length > 1) {
+          subjectsContainer.removeChild(this.parentElement);
+        }
+      });
+      
+      // Generate schedule
+      generateBtn.addEventListener('click', function() {
+        errorMessage.textContent = '';
+        const subjects = [];
+        const subjectInputs = document.querySelectorAll('.subject-input');
+        
+        // Validate inputs
+        let isValid = true;
+        
+        const dayStart = document.getElementById('dayStart').value;
+        const dayEnd = document.getElementById('dayEnd').value;
+        const classDuration = parseInt(document.getElementById('classDuration').value);
+        const breakDuration = parseInt(document.getElementById('breakDuration').value);
+        
+        if (!dayStart || !dayEnd || !classDuration || !breakDuration) {
+          errorMessage.textContent = 'Please fill in all time and duration fields.';
+          return;
+        }
+        
+        if (new Date(`2023-01-01T${dayStart}`) >= new Date(`2023-01-01T${dayEnd}`)) {
+          errorMessage.textContent = 'End time must be after start time.';
+          return;
+        }
+        
+        // Get selected days
+        const selectedDays = [];
+        const dayCheckboxes = document.querySelectorAll('input[name="days"]:checked');
+        dayCheckboxes.forEach(checkbox => {
+          selectedDays.push(checkbox.value);
+        });
+        
+        if (selectedDays.length === 0) {
+          errorMessage.textContent = 'Please select at least one working day.';
+          return;
+        }
+        
+        // Collect subject data
+        subjectInputs.forEach(input => {
+          const subjectName = input.querySelector('.subject-name').value.trim();
+          const classesPerWeek = parseInt(input.querySelector('.classes-per-week').value);
+          
+          if (subjectName && classesPerWeek) {
+            subjects.push({
+              name: subjectName,
+              classesPerWeek: classesPerWeek
+            });
+          } else {
+            isValid = false;
+          }
+        });
+        
+        if (!isValid || subjects.length === 0) {
+          errorMessage.textContent = 'Please fill in all subject names and classes per week.';
+          return;
+        }
+        
+        // Calculate total number of classes needed
+        const totalClassesNeeded = subjects.reduce((sum, subject) => sum + subject.classesPerWeek, 0);
+        
+        // Calculate available slots per day
+        const startMinutes = timeToMinutes(dayStart);
+        const endMinutes = timeToMinutes(dayEnd);
+        const totalMinutesPerDay = endMinutes - startMinutes;
+        const slotDuration = classDuration + breakDuration;
+        const slotsPerDay = Math.floor(totalMinutesPerDay / slotDuration);
+        
+        // Calculate total available slots
+        const totalAvailableSlots = slotsPerDay * selectedDays.length;
+        
+        if (totalClassesNeeded > totalAvailableSlots) {
+          errorMessage.textContent = `Not enough time slots available. You need ${totalClassesNeeded} slots but only have ${totalAvailableSlots} available.`;
+          return;
+        }
+        
+        // Generate schedule
+        const schedule = generateSchedule(
+          subjects,
+          selectedDays,
+          startMinutes,
+          classDuration,
+          breakDuration,
+          slotsPerDay
+        );
+        
+        // Display schedule
+        displaySchedule(schedule, selectedDays, startMinutes, classDuration, breakDuration);
+        scheduleContainer.style.display = 'block';
+        
+        // Scroll to schedule
+        scheduleContainer.scrollIntoView({ behavior: 'smooth' });
+      });
+      
+      // Print schedule
+      printBtn.addEventListener('click', function() {
+        window.print();
+      });
+      
+      // Helper functions
+      function timeToMinutes(timeString) {
+        const [hours, minutes] = timeString.split(':').map(Number);
+        return hours * 60 + minutes;
+      }
+      
+      function minutesToTime(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+      }
+      
+      function generateSchedule(subjects, days, startMinutes, classDuration, breakDuration, slotsPerDay) {
+        // Create a deep copy of subjects to work with
+        const subjectsCopy = JSON.parse(JSON.stringify(subjects));
+        
+        // Initialize schedule
+        const schedule = {};
+        days.forEach(day => {
+          schedule[day] = Array(slotsPerDay).fill(null);
+        });
+        
+        // Function to get random day and slot
+        function getRandomSlot() {
+          const day = days[Math.floor(Math.random() * days.length)];
+          const slot = Math.floor(Math.random() * slotsPerDay);
+          return { day, slot };
+        }
+        
+        // Distribute classes
+        subjectsCopy.forEach(subject => {
+          let classesAssigned = 0;
+          
+          // Try to distribute classes evenly across days first
+          while (classesAssigned < subject.classesPerWeek) {
+            let allocated = false;
+            let attempts = 0;
+            const maxAttempts = 100;
+            
+            while (!allocated && attempts < maxAttempts) {
+              const { day, slot } = getRandomSlot();
+              
+              // Check if slot is empty
+              if (schedule[day][slot] === null) {
+                schedule[day][slot] = subject.name;
+                classesAssigned++;
+                allocated = true;
+              }
+              
+              attempts++;
+            }
+            
+            // If couldn't allocate after max attempts, break to avoid infinite loop
+            if (!allocated) break;
+          }
+        });
+        
+        return schedule;
+      }
+      
+      function displaySchedule(schedule, days, startMinutes, classDuration, breakDuration) {
+        // Create table
+        let tableHtml = '<table>';
+        
+        // Header row with days
+        tableHtml += '<tr><th>Time</th>';
+        days.forEach(day => {
+          tableHtml += `<th>${day}</th>`;
+        });
+        tableHtml += '</tr>';
+        
+        // Time slots
+        const slots = Object.values(schedule)[0].length;
+        
+        for (let i = 0; i < slots; i++) {
+          const slotStartMinutes = startMinutes + i * (classDuration + breakDuration);
+          const slotEndMinutes = slotStartMinutes + classDuration;
+          
+          const startTime = minutesToTime(slotStartMinutes);
+          const endTime = minutesToTime(slotEndMinutes);
+          
+          tableHtml += `<tr><td>${startTime} - ${endTime}</td>`;
+          
+          days.forEach(day => {
+            const subject = schedule[day][i];
+            if (subject) {
+              tableHtml += `<td>${subject}</td>`;
+            } else {
+              tableHtml += '<td>-</td>';
+            }
+          });
+          
+          tableHtml += '</tr>';
+        }
+        
+        tableHtml += '</table>';
+        scheduleOutput.innerHTML = tableHtml;
+      }
+    });
+  </script>
+</body>
+</html>
