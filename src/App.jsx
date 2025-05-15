@@ -1,27 +1,19 @@
 import { useState } from "react";
-
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Journey from "./components/Journey";
-import Services from "./components/Services";
-import Testimonials from "./components/Testimonials";
-import FAQ from "./components/FAQ";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/layout/Layout";
 
 export default function App() {
   return (
-    <div className="font-sans">
-      <Navbar />
-      <Hero />
-      <About />
-      <Journey />
-      <Services />
-      <Testimonials />
-      <FAQ />
-      <Contact />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        {/* <Route path="about" element={<About />} />
+        <Route path="courses" element={<Courses />} />
+        <Route path="courses/:id" element={<CourseDetails />} />
+        <Route path="register" element={<Registration />} />
+        <Route path="*" element={<NotFound />} /> */}
+      </Route>
+    </Routes>
   );
 }
