@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FaListUl, FaGraduationCap } from "react-icons/fa";
+import { FaListUl } from "react-icons/fa";
+import Eduruz from "../../assets/Eduruz.png";
 import { MdClose } from "react-icons/md";
 
 const Header = () => {
@@ -29,7 +30,7 @@ const Header = () => {
   };
 
   const headerClasses = `fixed w-full z-50 transition-all duration-300 ${
-    isScrolled ? "bg-white shadow-subtle py-2" : "bg-white py-2"   //bg-transparent py-2 
+    isScrolled ? "bg-white shadow-subtle py-2" : "bg-white py-2" //bg-transparent py-2
   }`;
 
   const navLinkClasses = ({ isActive }) =>
@@ -44,9 +45,12 @@ const Header = () => {
     <header className={headerClasses}>
       <div className="container flex items-center justify-between">
         <Link to="/" className="flex items-center" onClick={closeMenu}>
-          <FaGraduationCap size={32} className="text-primary-500" />
-          <span className="ml-2 text-xl font-bold text-neutral-900">
-            LearnWell
+          <img src={Eduruz} style={{ width: 75, height: 50 }} />
+          <span className="ml-2 text-xl font-bold" style={{ color: "#1E293B" }}>
+            Edu
+          </span>
+          <span className="text-xl font-bold" style={{ color: "#FFD200" }}>
+            Ruz
           </span>
         </Link>
 

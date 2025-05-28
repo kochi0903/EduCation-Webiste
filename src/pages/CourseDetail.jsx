@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaClock, FaUser, FaChartBar,FaStar, FaCheckCircle, FaCalendar, FaAward  } from "react-icons/fa";
 import Button from '../components/ui/Button';
-import TestimonialCard from '../components/ui/TestimonialCard';
 import { courses } from '../data/courses';
 import { testimonials } from '../data/testimonials';
 
@@ -181,39 +180,6 @@ const CourseDetails = () => {
                     </div>
                   ))}
                 </div>
-                
-                <h3 className="text-xl font-bold mb-4">Instructor</h3>
-                <div className="flex items-start mb-8">
-                  <img
-                    src={course.instructor.imageUrl}
-                    alt={course.instructor.name}
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <h4 className="font-bold text-lg">{course.instructor.name}</h4>
-                    <p className="text-neutral-600 text-sm mb-2">{course.instructor.role}</p>
-                    <p className="text-neutral-700">{course.instructor.bio}</p>
-                  </div>
-                </div>
-                
-                {/* Testimonials */}
-                {courseTestimonials.length > 0 && (
-                  <div>
-                    <h3 className="text-xl font-bold mb-6">Student Testimonials</h3>
-                    <div className="space-y-6">
-                      {courseTestimonials.map((testimonial, index) => (
-                        <TestimonialCard
-                          key={index}
-                          quote={testimonial.quote}
-                          author={testimonial.author}
-                          role={testimonial.role}
-                          avatarUrl={testimonial.avatarUrl}
-                          rating={testimonial.rating}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
             
@@ -221,7 +187,7 @@ const CourseDetails = () => {
             <div className="lg:col-span-1">
               {/* Price Card */}
               <div className="bg-white rounded-lg shadow-card p-6 mb-8 sticky top-24">
-                <div className="text-3xl font-bold mb-4">${course.price}</div>
+                <div className="text-3xl font-bold mb-4">Rs{course.price}</div>
                 
                 <Button to="/register" variant="primary" className="w-full mb-4">
                   Enroll Now
@@ -275,32 +241,6 @@ const CourseDetails = () => {
                   <span className="text-neutral-600">{course.reviews} reviews</span>
                 </div>
               </div>
-              
-              {/* Related Courses */}
-              {relatedCourses.length > 0 && (
-                <div className="bg-white rounded-lg shadow-card p-6">
-                  <h3 className="text-xl font-bold mb-6">Related Courses</h3>
-                  <div className="space-y-4">
-                    {relatedCourses.map((relatedCourse) => (
-                      <div key={relatedCourse.id} className="flex items-start">
-                        <img
-                          src={relatedCourse.imageUrl}
-                          alt={relatedCourse.title}
-                          className="w-20 h-16 object-cover rounded mr-4"
-                        />
-                        <div>
-                          <h4 className="font-medium mb-1 line-clamp-2">
-                            <a href={`/courses/${relatedCourse.id}`} className="hover:text-primary-600 transition-colors">
-                              {relatedCourse.title}
-                            </a>
-                          </h4>
-                          <div className="text-primary-600 font-medium">${relatedCourse.price}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>

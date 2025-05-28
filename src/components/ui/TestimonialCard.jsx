@@ -5,7 +5,6 @@ const TestimonialCard = ({
   quote,
   author,
   role,
-  avatarUrl,
   rating,
   className = "",
 }) => {
@@ -28,11 +27,6 @@ const TestimonialCard = ({
       <p className="text-neutral-700 mb-6 italic">"{quote}"</p>
 
       <div className="flex items-center">
-        <img
-          src={avatarUrl}
-          alt={author}
-          className="w-12 h-12 rounded-full object-cover mr-4"
-        />
         <div>
           <h4 className="font-medium text-neutral-900">{author}</h4>
           <p className="text-sm text-neutral-600">{role}</p>

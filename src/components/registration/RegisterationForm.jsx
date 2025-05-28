@@ -8,22 +8,11 @@ const RegistrationForm = () => {
     lastName: "",
     email: "",
     phone: "",
-    courseInterest: "",
-    message: "",
+    schoolCollege: "", // Added school/college
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const courseOptions = [
-    "Digital Marketing",
-    "Web Development",
-    "Data Science",
-    "Business Management",
-    "Graphic Design",
-    "Not sure yet",
-  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,8 +58,8 @@ const RegistrationForm = () => {
       newErrors.phone = "Invalid phone number";
     }
 
-    if (!formData.courseInterest) {
-      newErrors.courseInterest = "Please select a course interest";
+    if (!formData.schoolCollege.trim()) {
+      newErrors.schoolCollege = "School/College is required";
     }
 
     setErrors(newErrors);
@@ -83,61 +72,19 @@ const RegistrationForm = () => {
 
     if (validateForm()) {
       setIsSubmitting(true);
+      const meetingBaseUrl = "https://koalendar.com/e/meet-with-kisholoy-roy"; // Replace with your link
+      const queryParams = new URLSearchParams({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        a1: formData.phone, // Example: Custom answer 1 for phone
+        a2: formData.schoolCollege, // Example: Custom answer 2 for school/college
+      });
 
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
+      const calendlyUrl = `${meetingBaseUrl}?${queryParams.toString()}`;
 
-        // Reset form after submission
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          courseInterest: "",
-          message: "",
-        });
-      }, 1500);
+      window.location.href = calendlyUrl;
     }
   };
-
-  if (isSubmitted) {
-    return (
-      <motion.div
-        className="bg-white rounded-lg shadow-card p-8 text-center"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="w-16 h-16 mx-auto bg-success-50 rounded-full flex items-center justify-center mb-6">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-success-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
-        <h2 className="text-2xl font-bold mb-4">Registration Successful!</h2>
-        <p className="text-neutral-600 mb-6">
-          Thank you for registering with LearnWell Academy. We've sent a
-          confirmation email to your inbox. Our team will contact you shortly to
-          discuss next steps.
-        </p>
-        <Button to="/" variant="primary">
-          Return to Home
-        </Button>
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
@@ -146,7 +93,7 @@ const RegistrationForm = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-2xl font-bold mb-6">Register for a Course</h2>
+      <h2 className="text-2xl font-bold mb-6">Book Your Consultation</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -160,6 +107,7 @@ const RegistrationForm = () => {
               id="firstName"
               name="firstName"
               value={formData.firstName}
+              placeholder="Rohan"
               onChange={handleChange}
               className={`form-input ${
                 errors.firstName ? "border-error-500 focus:ring-error-500" : ""
@@ -179,6 +127,7 @@ const RegistrationForm = () => {
               type="text"
               id="lastName"
               name="lastName"
+              placeholder="Singh"
               value={formData.lastName}
               onChange={handleChange}
               className={`form-input ${
@@ -197,6 +146,7 @@ const RegistrationForm = () => {
               type="email"
               id="email"
               name="email"
+              placeholder="rohan@g***.com"
               value={formData.email}
               onChange={handleChange}
               className={`form-input ${
@@ -217,60 +167,35 @@ const RegistrationForm = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="(123) 456-7890"
+              placeholder="+91 911111111"
               className={`form-input ${
                 errors.phone ? "border-error-500 focus:ring-error-500" : ""
               }`}
             />
             {errors.phone && <p className="form-error">{errors.phone}</p>}
           </div>
-        </div>
 
-        {/* Course Interest */}
-        <div className="mb-6">
-          <label htmlFor="courseInterest" className="form-label">
-            Course Interest <span className="text-error-500">*</span>
-          </label>
-          <select
-            id="courseInterest"
-            name="courseInterest"
-            value={formData.courseInterest}
-            onChange={handleChange}
-            className={`form-input ${
-              errors.courseInterest
-                ? "border-error-500 focus:ring-error-500"
-                : ""
-            }`}
-          >
-            <option value="">Select a course</option>
-            {courseOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {errors.courseInterest && (
-            <p className="form-error">{errors.courseInterest}</p>
-          )}
+          {/* School/College */} 
+          <div className="md:col-span-2">
+            <label htmlFor="schoolCollege" className="form-label">
+              School/College <span className="text-error-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="schoolCollege"
+              name="schoolCollege"
+              value={formData.schoolCollege}
+              onChange={handleChange}
+              className={`form-input ${
+                errors.schoolCollege ? "border-error-500 focus:ring-error-500" : ""
+              }`}
+              placeholder="e.g., DAV Public School / MAKAUT University"
+            />
+            {errors.schoolCollege && (
+              <p className="form-error">{errors.schoolCollege}</p>
+            )}
+          </div>
         </div>
-
-        {/* Message */}
-        <div className="mb-6">
-          <label htmlFor="message" className="form-label">
-            Additional Information
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={4}
-            className="form-input"
-            placeholder="Tell us about your learning goals..."
-          />
-        </div>
-
-        {/* Submit Button */}
         <Button
           type="submit"
           variant="primary"
@@ -302,7 +227,7 @@ const RegistrationForm = () => {
               Processing...
             </span>
           ) : (
-            "Submit Registration"
+            "Proceed to Booking"
           )}
         </Button>
 

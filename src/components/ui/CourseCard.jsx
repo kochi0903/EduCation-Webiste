@@ -38,7 +38,7 @@ const CourseCard = ({ course, className = "" }) => {
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="font-bold text-lg">${course.price}</div>
+          <div className="font-bold text-lg">Rs{course.price}</div>
           <Button to={`/courses/${course.id}`} variant="secondary" size="sm">
             View Details
           </Button>

@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { FaGraduationCap, FaBookOpen, FaAward } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
 import SectionTitle from "../components/ui/SectionTitle";
+import About_OurStory from "../assets/About_OurStory.jpeg";
+import AboutTeach from "../assets/About_Teach.jpeg";
+import Roy from "../assets/KisholoyRoy.jpg";
 
 const About = () => {
   useEffect(() => {
@@ -11,32 +14,10 @@ const About = () => {
 
   const team = [
     {
-      name: "Dr. Elizabeth Chen",
-      role: "Founder & CEO",
-      bio: "With over 20 years of experience in education and a Ph.D. in Educational Psychology, Dr. Chen founded LearnWell Academy with a vision to transform traditional learning methods.",
-      imageUrl:
-        "https://images.pexels.com/photos/3746314/pexels-photo-3746314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      name: "Michael Rodriguez",
-      role: "Head of Curriculum",
-      bio: "Michael brings 15 years of industry experience and academic excellence to developing our comprehensive, cutting-edge curriculum that meets both student and industry needs.",
-      imageUrl:
-        "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      name: "Sarah Johnson",
-      role: "Director of Student Success",
-      bio: "Sarah&apos;s background in career counseling and student mentorship drives our commitment to providing exceptional support and guidance to every student.",
-      imageUrl:
-        "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      name: "David Williams",
-      role: "Lead Instructor",
-      bio: "David combines his technical expertise and passion for teaching to deliver engaging, practical learning experiences that prepare students for real-world challenges.",
-      imageUrl:
-        "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      name: "Kisholoy Roy",
+      role: "CTO",
+      bio: "With over 4 years of experience in IT Companies and a MSc in Data Science, Kisholoy founded EduRuz Academy with a vision to transform traditional learning methods.",
+      imageUrl: `${Roy}`,
     },
   ];
 
@@ -73,7 +54,7 @@ const About = () => {
       <section className="relative py-20 bg-neutral-900">
         <div className="absolute inset-0 z-0 opacity-20">
           <img
-            src="https://images.pexels.com/photos/301926/pexels-photo-301926.jpeg"
+            src={AboutTeach}
             alt="About Us Background"
             className="w-full h-full object-cover"
           />
@@ -107,7 +88,7 @@ const About = () => {
               transition={{ duration: 0.6 }}
             >
               <img
-                src="https://images.pexels.com/photos/256431/pexels-photo-256431.jpeg"
+                src={About_OurStory}
                 alt="Our Story"
                 className="rounded-lg shadow-elevated w-full h-auto"
               />
@@ -155,7 +136,7 @@ const About = () => {
             centered
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid flex grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <motion.div
                 key={index}
@@ -175,7 +156,7 @@ const About = () => {
       </section>
 
       {/* Our Team Section */}
-      <section className="py-20">
+      <section className="py-10">
         <div className="container">
           <SectionTitle
             title="Meet Our Team"
@@ -183,32 +164,33 @@ const About = () => {
             centered
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-lg overflow-hidden shadow-card hover-lift"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <img
-                  src={member.imageUrl}
-                  alt={member.name}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                  <p className="text-secondary-600 font-medium mb-3">
-                    {member.role}
-                  </p>
-                  <p className="text-neutral-600">{member.bio}</p>
-                </div>
-              </motion.div>
-            ))}
+         
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-6 max-w-7xl mx-auto">
+              {team.map((member, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-lg overflow-hidden shadow-card hover-lift max-w-sm w-full mx-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                >
+                  <img
+                    src={member.imageUrl}
+                    alt={member.name}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+                    <p className="text-secondary-600 font-medium mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-neutral-600">{member.bio}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
       </section>
 
       {/* Mission Statement */}

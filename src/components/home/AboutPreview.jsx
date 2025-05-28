@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import Button from "../ui/Button";
+import StudentsAbout from "../../assets/StudentsAbout.jpeg";
+
 
 const AboutPreview = () => {
   const benefits = [
@@ -26,7 +28,7 @@ const AboutPreview = () => {
             transition={{ duration: 0.6 }}
           >
             <img
-              src="https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg"
+              src={StudentsAbout}
               alt="About LearnWell Academy"
               className="rounded-lg shadow-elevated w-full h-[500px] object-cover"
             />
