@@ -16,7 +16,7 @@ const About = () => {
     {
       name: "Kisholoy Roy",
       role: "CTO",
-      bio: "With over 4 years of experience in IT Companies and a MSc in Data Science, Kisholoy founded EduRuz Academy with a vision to transform traditional learning methods.",
+      bio: "With over 5 years of experience in Web Devlopment and SaaS and a MSc in Data Science, Kisholoy founded EduRuz Academy with a vision to transform traditional learning methods.",
       imageUrl: `${Roy}`,
     },
   ];
