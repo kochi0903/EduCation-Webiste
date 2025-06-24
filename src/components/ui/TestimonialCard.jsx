@@ -1,13 +1,7 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
-const TestimonialCard = ({
-  quote,
-  author,
-  role,
-  rating,
-  className = "",
-}) => {
+const TestimonialCard = ({ quote, author, role, rating, className = "" }) => {
   return (
     <div className={`bg-white rounded-lg p-6 shadow-card ${className}`}>
       <div className="flex items-center mb-4">
