@@ -14,7 +14,7 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-         <Route path="courses" element={<Courses />} /> 
+        <Route path="courses" element={<Courses />} />
         <Route path="courses/:id" element={<CourseDetails />} />
         <Route path="register" element={<Registration />} /> *
         <Route path="*" element={<NotFound />} />
