@@ -6,7 +6,9 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetail";
-import Registration from "./pages/Register";
+import Consultancy from "./pages/Consultancy";
+import Register from "./components/layout/Register";
+
 
 export default function App() {
   return (
@@ -16,9 +18,11 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="courses" element={<Courses />} />
         <Route path="courses/:id" element={<CourseDetails />} />
-        <Route path="register" element={<Registration />} /> *
+        <Route path="register" element={<Register/>} />
+        <Route path="consultancy" element={<Consultancy/>} /> 
         <Route path="*" element={<NotFound />} />
       </Route>
+      
     </Routes>
   );
 }

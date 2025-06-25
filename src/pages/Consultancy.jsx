@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import RegistrationForm from "../components/registration/RegisterationForm";
 
-const Registration = () => {
+const Consultancy = () => {
   useEffect(() => {
     document.title = "Register | LearnWell Academy";
   }, []);
@@ -34,11 +34,11 @@ const Registration = () => {
         </div>
       </section>
 
-      {/* Registration Section */}
+      {/* Consultancy Section */}
       <section className="py-16 bg-neutral-100">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Registration Form */}
+            {/* Consultancy Form */}
             <div>
               <RegistrationForm />
             </div>
@@ -146,4 +146,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Consultancy;
