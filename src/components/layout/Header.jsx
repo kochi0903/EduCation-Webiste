@@ -29,16 +29,14 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const headerClasses = `fixed w-full z-50 transition-all duration-300 ${
-    isScrolled ? "bg-white shadow-subtle py-2" : "bg-white py-2" //bg-transparent py-2
-  }`;
+  const headerClasses = `fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-subtle py-2" : "bg-white py-2" //bg-transparent py-2
+    }`;
 
   const navLinkClasses = ({ isActive }) =>
     `relative px-3 py-2 text-lg font-medium transition-colors duration-200
-    ${
-      isActive
-        ? "text-primary-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-500"
-        : "text-primary-700 hover:text-primary-600"
+    ${isActive
+      ? "text-primary-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-500"
+      : "text-primary-700 hover:text-primary-600"
     }`;
 
   return (
@@ -81,9 +79,8 @@ const Header = () => {
 
         {/* Mobile Nav */}
         <div
-          className={`fixed top-0 right-0 bottom-0 w-64 bg-white shadow-elevated z-50 transform transition-transform duration-300 ease-in-out ${
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
-          } md:hidden`}
+          className={`fixed top-0 right-0 bottom-0 w-64 bg-white shadow-elevated z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+            } md:hidden`}
         >
           <div className="flex justify-end p-4">
             <button
@@ -98,10 +95,9 @@ const Header = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `px-4 py-3 mb-2 rounded-md ${
-                  isActive
-                    ? "bg-primary-100 text-primary-700"
-                    : "text-neutral-700 hover:bg-neutral-100"
+                `px-4 py-3 mb-2 rounded-md ${isActive
+                  ? "bg-primary-100 text-primary-700"
+                  : "text-neutral-700 hover:bg-neutral-100"
                 }`
               }
               onClick={closeMenu}
@@ -112,10 +108,9 @@ const Header = () => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                `px-4 py-3 mb-2 rounded-md ${
-                  isActive
-                    ? "bg-primary-100 text-primary-700"
-                    : "text-neutral-700 hover:bg-neutral-100"
+                `px-4 py-3 mb-2 rounded-md ${isActive
+                  ? "bg-primary-100 text-primary-700"
+                  : "text-neutral-700 hover:bg-neutral-100"
                 }`
               }
               onClick={closeMenu}
@@ -125,10 +120,9 @@ const Header = () => {
             <NavLink
               to="/courses"
               className={({ isActive }) =>
-                `px-4 py-3 mb-2 rounded-md ${
-                  isActive
-                    ? "bg-primary-100 text-primary-700"
-                    : "text-neutral-700 hover:bg-neutral-100"
+                `px-4 py-3 mb-2 rounded-md ${isActive
+                  ? "bg-primary-100 text-primary-700"
+                  : "text-neutral-700 hover:bg-neutral-100"
                 }`
               }
               onClick={closeMenu}

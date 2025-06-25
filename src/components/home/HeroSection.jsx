@@ -58,12 +58,12 @@ const HeroSection = () => {
               Explore Courses
             </Button>
             <Button
-              to="/register"
+              to="/consultancy"
               variant="outline"
               size="lg"
               className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:border-white/40"
             >
-              Register Now
+              Schedule A Meeting
             </Button>
           </motion.div>
         </div>
