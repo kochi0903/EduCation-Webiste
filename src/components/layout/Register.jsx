@@ -14,13 +14,12 @@ const Register = () => {
     e.preventDefault();
     const newErrors = {};
 
-
     if (!firstName.trim()) {
       newErrors.firstName = 'First name is required'
     }
 
     if (!lastName.trim()) {
-      newErrors.lastName = 'Last is required'
+      newErrors.lastName = 'Last name is required'
     }
 
     if (!email.trim()) {
@@ -66,173 +65,165 @@ const Register = () => {
 
   return (
     <>
-
-      <div className="registerContainer  flex justify-evenly items-center pt-10 space-x-3 relative bg-[url('src/assets/bg.jpg')] bg-cover bg-no-repeat bg-[center_40%]">
-        <div className="left h-[35rem] w-1/2 flex justify-center items-center">
-
+      <div className="registerContainer min-h-screen flex justify-center items-center p-4 bg-[url('src/assets/bg.jpg')] bg-cover bg-no-repeat bg-center">
+        {/* Left side - hidden on mobile */}
+        <div className="hidden lg:flex lg:w-1/2 lg:h-[35rem] justify-center items-center">
+          {/* You can add content here if needed */}
         </div>
-        <div className="right w-[33rem] h-[30rem] rounded-2xl flex flex-col justify-center items-center p-3  bg-gray-500 bg-opacity-50 border-2 border-gray-200 mt-3">
-          <div className="account text-3xl font-extrabold text-white mb-2">Join With Us</div>
-          <form onSubmit={handleSubmit} className='flex flex-col items-center'>
-            <div className="top flex space-x-10 mt-2">
-              {/*First Name Field */}
-              <div className={`name flex flex-col text-white font-bold mt-3`}>First Name
-                <input type="text"
-                  placeholder='Ishita'
+
+        {/* Right side - Registration form */}
+        <div className="w-full max-w-2xl lg:w-[33rem] bg-gray-500 bg-opacity-50 border-2 border-gray-200 rounded-2xl p-4 sm:p-6 lg:p-8">
+          <div className="text-center">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 sm:mb-6">Join With Us</h1>
+          </div>
+
+          <form onSubmit={handleSubmit} className='space-y-2'>
+            {/* Name Fields Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-10">
+              {/* First Name Field */}
+              <div className="flex flex-col">
+                <label className="text-white font-bold mb-2">First Name</label>
+                <input
+                  type="text"
+                  placeholder='John'
                   name="firstName"
-                  className={` mt-3 rounded-sm border  hover:shadow-lg transition-shadow duration-200 font-thin bg-transparent border-b-white text-white
-                    placeholder-gray-300
-                    ${errors.firstName ? 'border-b-red-500' : 'border-transparent'
-                    }  text-base pl-3
-                hover:border-b-white
-                  focus:border-b-yellow-300 border-2
-                  focus:outline-none`}
+                  className={`w-full mt-3 rounded-sm font-thin bg-transparent text-white placeholder-gray-300 text-base pl-3 focus:outline-none transition-shadow duration-200
+                    ${errors.firstName
+                      ? 'border-b-2 border-b-red-500 border-transparent'
+                      : 'border-2 border-transparent border-b-white hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
+                    }`}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
                 {errors.firstName && (
-                  <p className='text-red-400 text-xs mt-1 mb-0'>{errors.firstName}</p>
+                  <p className='text-red-400 text-xs mt-1'>{errors.firstName}</p>
                 )}
               </div>
 
-              {/*Last Name Field */}
-              <div className={`name flex flex-col text-white font-bold mt-3`}>Last Name
-                <input type="text"
-                  placeholder='Dey'
+              {/* Last Name Field */}
+              <div className="flex flex-col">
+                <label className="text-white font-bold mb-2">Last Name</label>
+                <input
+                  type="text"
+                  placeholder='Doe'
                   name="lastName"
-                  className={`mt-3 rounded-sm border  hover:shadow-lg transition-shadow duration-200 font-thin bg-transparent border-b-gray-300 text-white
-                    placeholder-gray-300
-                    ${errors.lastName ? 'border-b-red-500' : 'border-transparent'
-                    }  text-base pl-3
-                hover:border-b-white
-                  focus:border-b-yellow-300 border-2
-                  focus:outline-none`}
+                  className={`w-full mt-3 rounded-sm font-thin bg-transparent text-white placeholder-gray-300 text-base pl-3 focus:outline-none transition-shadow duration-200
+                    ${errors.lastName
+                      ? 'border-b-2 border-b-red-500 border-transparent'
+                      : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
+                    }`}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
                 {errors.lastName && (
-                  <p className='text-red-400 text-xs mt-1 mb-0'>{errors.lastName}</p>
+                  <p className='text-red-400 text-xs mt-1'>{errors.lastName}</p>
                 )}
               </div>
             </div>
 
-            <div className="mid flex space-x-10 mt-2">
-
+            {/* Email and Phone Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-10 mt-2">
               {/* Email Field */}
-              <div className="email flex flex-col text-white font-bold mt-3">Email
-                <input type="email"
+              <div className="flex flex-col">
+                <label className="text-white font-bold mb-2">Email</label>
+                <input
+                  type="email"
                   placeholder='user@example.com'
-                  className={` mt-3 rounded-sm pl-3 border
-                     hover:shadow-xl shadow-gray-600 transition-shadow duration-200
-                     font-thin bg-transparent border-b-gray-300 text-white 
-                    placeholder-gray-300
-                     ${errors.email ? 'border-b-red-500' : 'border-transparent'
-                    }
-                hover:border-b-white
-                  focus:border-b-yellow-300 border-2
-                  focus:outline-none`}
+                  className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
+                    ${errors.email
+                      ? 'border-b-2 border-b-red-500 border-transparent'
+                      : 'border-2 border-transparent border-b-gray-300 hover:shadow-xl shadow-gray-600 hover:border-b-white focus:border-b-yellow-300'
+                    }`}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 {errors.email && (
-                  <p className='text-red-400 text-xs mt-1 mb-0'>{errors.email}</p>
+                  <p className='text-red-400 text-xs mt-1'>{errors.email}</p>
                 )}
-
               </div>
 
-
-
-
               {/* Phone Number */}
-              <div className="phone flex flex-col text-white font-bold mt-3">Phone Number
-                <input type="tel"
+              <div className="flex flex-col">
+                <label className="text-white font-bold mb-2">Phone Number</label>
+                <input
+                  type="tel"
                   placeholder='91*******90'
-                  className={` mt-3 rounded-sm pl-3 border
-                    hover:shadow-lg transition-shadow duration-200 font-thin bg-transparent border-b-gray-300 text-white
-                    placeholder-gray-300
-                  ${errors.phoneNumber ? 'border-b-red-500' : 'border-transparent'
-                    }
-                  hover:border-b-white
-                  focus:border-b-yellow-300 border-2
-                  focus:outline-none`}
+                  className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
+                    ${errors.phoneNumber
+                      ? 'border-b-2 border-b-red-500 border-transparent'
+                      : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
+                    }`}
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
                 {errors.phoneNumber && (
-                  <p className='text-red-400 text-xs mt-1 mb-0'>{errors.phoneNumber}</p>
+                  <p className='text-red-400 text-xs mt-1'>{errors.phoneNumber}</p>
                 )}
-
               </div>
-
             </div>
 
-            <div className="bottom flex space-x-10 mt-3">
-
+            {/* Password Fields Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-10 mt-3">
               {/* Password */}
-              <div className="password flex flex-col text-white font-bold mt-3">Password
-                <input type="password"
+              <div className="flex flex-col">
+                <label className="text-white font-bold mb-2">Password</label>
+                <input
+                  type="password"
                   placeholder='******'
-                  className={`mt-3 rounded-sm pl-3 border
-                     hover:shadow-lg transition-shadow duration-200 font-thin bg-transparent border-b-gray-300 text-white
-                    placeholder-gray-300
-                  ${errors.password ? 'border-b-red-500' : 'border-transparent'
-                    }
-                  hover:border-b-white
-                  focus:border-b-yellow-300 border-2
-                  focus:outline-none`}
+                  className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
+                    ${errors.password
+                      ? 'border-b-2 border-b-red-500 border-transparent'
+                      : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
+                    }`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 {errors.password && (
-                  <p className='text-red-400 text-xs mt-1 mb-0'>{errors.password}</p>
+                  <p className='text-red-400 text-xs mt-1'>{errors.password}</p>
                 )}
               </div>
 
               {/* Confirm Password */}
-              <div className="password flex flex-col text-white font-bold mt-3">Confirm Password
-                <input type="password"
+              <div className="flex flex-col">
+                <label className="text-white font-bold mb-2">Confirm Password</label>
+                <input
+                  type="password"
                   placeholder='******'
-                  className={`mt-3 rounded-sm pl-3 border
-                     hover:shadow-lg transition-shadow duration-200 font-thin bg-transparent border-b-gray-300 text-white
-                    placeholder-gray-300
-                  ${errors.password ? 'border-b-red-500' : 'border-transparent'
-                    }
-                  hover:border-b-white
-                  focus:border-b-yellow-300 border-2
-                  focus:outline-none`}
+                  className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
+                    ${errors.confirmPassword
+                      ? 'border-b-2 border-b-red-500 border-transparent'
+                      : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
+                    }`}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 {errors.confirmPassword && (
-                  <p className='text-red-400 text-xs mt-1 mb-0'>{errors.confirmPassword}</p>
+                  <p className='text-red-400 text-xs mt-1'>{errors.confirmPassword}</p>
                 )}
               </div>
-
-
             </div>
 
-            <div className="submit flex justify-center items-center">
-              <input type="submit"
+            {/* Submit Button */}
+            <div className="flex justify-center pt-2">
+              <input
+                type="submit"
                 value="Sign Up"
-                className=' mt-10 w-60 h-10 bg-yellow-400 flex justify-center align-center rounded-full 
-              hover:bg-yellow-500
-              active:bg-yellow-300
-              active:border border-yellow-600' />
-            </div>
-            <div className="checkmarks flex text-xs space-x-2 justify-around items-center w-1/2 m-2">
-              <div className="privacy text-yellow-400 "><a href="#" 
-              className='hover:text-yellow-600
-              focus:text-white'>Privacy Policy</a></div>
-              <div className="terms text-yellow-400"><a href="#"
-              className='hover:text-yellow-600
-              focus:text-white '>Terms & Conditions</a></div>
+                className='w-full sm:w-60 h-10 bg-yellow-400 flex justify-center items-center rounded-full font-semibold
+                hover:bg-yellow-500 active:bg-yellow-300 active:border border-yellow-600 cursor-pointer' />
             </div>
 
+            {/* Links */}
+            <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 pt-2 text-xs">
+              <a href="#" className='text-yellow-400 hover:text-yellow-600 focus:text-white transition-colors duration-200'>
+                Privacy Policy
+              </a>
+              <a href="#" className='text-yellow-400 hover:text-yellow-600 focus:text-white transition-colors duration-200'>
+                Terms & Conditions
+              </a>
+            </div>
           </form>
         </div>
-
       </div>
-
     </>
   )
 }
