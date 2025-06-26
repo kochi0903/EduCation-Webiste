@@ -70,26 +70,26 @@ const Register = () => {
         <div className="hidden lg:flex lg:w-1/2 lg:h-[35rem] justify-center items-center">
           {/* You can add content here if needed */}
         </div>
-        
+
         {/* Right side - Registration form */}
         <div className="w-full max-w-2xl lg:w-[33rem] bg-gray-500 bg-opacity-50 border-2 border-gray-200 rounded-2xl p-4 sm:p-6 lg:p-8">
           <div className="text-center">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 sm:mb-6">Join With Us</h1>
           </div>
-          
+
           <form onSubmit={handleSubmit} className='space-y-2'>
             {/* Name Fields Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-10">
               {/* First Name Field */}
               <div className="flex flex-col">
                 <label className="text-white font-bold mb-2">First Name</label>
-                <input 
+                <input
                   type="text"
-                  placeholder='Ishita'
+                  placeholder='John'
                   name="firstName"
                   className={`w-full mt-3 rounded-sm font-thin bg-transparent text-white placeholder-gray-300 text-base pl-3 focus:outline-none transition-shadow duration-200
-                    ${errors.firstName 
-                      ? 'border-b-2 border-b-red-500 border-transparent' 
+                    ${errors.firstName
+                      ? 'border-b-2 border-b-red-500 border-transparent'
                       : 'border-2 border-transparent border-b-white hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
                     }`}
                   value={firstName}
@@ -103,13 +103,13 @@ const Register = () => {
               {/* Last Name Field */}
               <div className="flex flex-col">
                 <label className="text-white font-bold mb-2">Last Name</label>
-                <input 
+                <input
                   type="text"
-                  placeholder='Dey'
+                  placeholder='Doe'
                   name="lastName"
                   className={`w-full mt-3 rounded-sm font-thin bg-transparent text-white placeholder-gray-300 text-base pl-3 focus:outline-none transition-shadow duration-200
-                    ${errors.lastName 
-                      ? 'border-b-2 border-b-red-500 border-transparent' 
+                    ${errors.lastName
+                      ? 'border-b-2 border-b-red-500 border-transparent'
                       : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
                     }`}
                   value={lastName}
@@ -126,12 +126,12 @@ const Register = () => {
               {/* Email Field */}
               <div className="flex flex-col">
                 <label className="text-white font-bold mb-2">Email</label>
-                <input 
+                <input
                   type="email"
                   placeholder='user@example.com'
                   className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
-                    ${errors.email 
-                      ? 'border-b-2 border-b-red-500 border-transparent' 
+                    ${errors.email
+                      ? 'border-b-2 border-b-red-500 border-transparent'
                       : 'border-2 border-transparent border-b-gray-300 hover:shadow-xl shadow-gray-600 hover:border-b-white focus:border-b-yellow-300'
                     }`}
                   value={email}
@@ -145,12 +145,12 @@ const Register = () => {
               {/* Phone Number */}
               <div className="flex flex-col">
                 <label className="text-white font-bold mb-2">Phone Number</label>
-                <input 
+                <input
                   type="tel"
                   placeholder='91*******90'
                   className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
-                    ${errors.phoneNumber 
-                      ? 'border-b-2 border-b-red-500 border-transparent' 
+                    ${errors.phoneNumber
+                      ? 'border-b-2 border-b-red-500 border-transparent'
                       : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
                     }`}
                   value={phoneNumber}
@@ -167,12 +167,12 @@ const Register = () => {
               {/* Password */}
               <div className="flex flex-col">
                 <label className="text-white font-bold mb-2">Password</label>
-                <input 
+                <input
                   type="password"
                   placeholder='******'
                   className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
-                    ${errors.password 
-                      ? 'border-b-2 border-b-red-500 border-transparent' 
+                    ${errors.password
+                      ? 'border-b-2 border-b-red-500 border-transparent'
                       : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
                     }`}
                   value={password}
@@ -186,12 +186,12 @@ const Register = () => {
               {/* Confirm Password */}
               <div className="flex flex-col">
                 <label className="text-white font-bold mb-2">Confirm Password</label>
-                <input 
+                <input
                   type="password"
                   placeholder='******'
                   className={`w-full mt-3 rounded-sm pl-3 font-thin bg-transparent text-white placeholder-gray-300 focus:outline-none transition-shadow duration-200
-                    ${errors.confirmPassword 
-                      ? 'border-b-2 border-b-red-500 border-transparent' 
+                    ${errors.confirmPassword
+                      ? 'border-b-2 border-b-red-500 border-transparent'
                       : 'border-2 border-transparent border-b-gray-300 hover:shadow-lg hover:border-b-white focus:border-b-yellow-300'
                     }`}
                   value={confirmPassword}
@@ -205,7 +205,7 @@ const Register = () => {
 
             {/* Submit Button */}
             <div className="flex justify-center pt-2">
-              <input 
+              <input
                 type="submit"
                 value="Sign Up"
                 className='w-full sm:w-60 h-10 bg-yellow-400 flex justify-center items-center rounded-full font-semibold
