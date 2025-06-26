@@ -9,7 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -33,9 +33,9 @@ const Register = () => {
       newErrors.phoneNumber = "Phone number is required.";
     } else if (phoneNumber.length !== 10) {
       newErrors.phoneNumber = "Phone number is invalid";
-    } else if (!/^\d+$/.test(phoneNumber)) { 
-  newErrors.phoneNumber = "Phone number must contain only digits.";
-}
+    } else if (!/^\d+$/.test(phoneNumber)) {
+      newErrors.phoneNumber = "Phone number must contain only digits.";
+    }
 
     if (!password) {
       newErrors.password = 'Password is required.';
@@ -73,7 +73,7 @@ const Register = () => {
         </div>
         <div className="right w-[33rem] h-[30rem] rounded-2xl flex flex-col justify-center items-center p-3  bg-gray-500 bg-opacity-50 border-2 border-gray-200 mt-3">
           <div className="account text-3xl font-extrabold text-white mb-2">Join With Us</div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='flex flex-col items-center'>
             <div className="top flex space-x-10 mt-2">
               {/*First Name Field */}
               <div className={`name flex flex-col text-white font-bold mt-3`}>First Name
@@ -214,11 +214,20 @@ const Register = () => {
             <div className="submit flex justify-center items-center">
               <input type="submit"
                 value="Sign Up"
-                className=' mt-12 w-60 h-10 bg-yellow-400 flex justify-center align-center rounded-full 
+                className=' mt-10 w-60 h-10 bg-yellow-400 flex justify-center align-center rounded-full 
               hover:bg-yellow-500
               active:bg-yellow-300
               active:border border-yellow-600' />
             </div>
+            <div className="checkmarks flex text-xs space-x-2 justify-around items-center w-1/2 m-2">
+              <div className="privacy text-yellow-400 "><a href="#" 
+              className='hover:text-yellow-600
+              focus:text-white'>Privacy Policy</a></div>
+              <div className="terms text-yellow-400"><a href="#"
+              className='hover:text-yellow-600
+              focus:text-white '>Terms & Conditions</a></div>
+            </div>
+
           </form>
         </div>
 
