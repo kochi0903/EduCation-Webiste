@@ -9,8 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
-  // const [isRegistered, setIsRegistered] = useState(false);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -54,8 +53,8 @@ const Register = () => {
 
     if (Object.keys(newErrors).length === 0) {
       console.log("Registered");
-      // setIsRegistered(true);
-      setFullName('');
+      setFirstName('');
+      setLastName('');
       setEmail('');
       setPhoneNumber('');
       setPassword('');
