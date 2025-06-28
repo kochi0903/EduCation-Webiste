@@ -8,6 +8,7 @@ import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetail";
 import Consultancy from "./pages/Consultancy";
 import Register from "./components/layout/Register";
+import LoginForm from "./components/login/LoginForm";
 
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="register" element={<Register/>} />
         <Route path="consultancy" element={<Consultancy/>} /> 
         <Route path="*" element={<NotFound />} />
+        <Route path="login" element={<LoginForm />} />
       </Route>
       
     </Routes>
