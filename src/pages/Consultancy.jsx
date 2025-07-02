@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import RegistrationForm from "../components/registration/RegisterationForm";
+import ConsultancyForm from "../components/Consultancy/ConsultancyForm";
+// import Register from "../components/RegisterForm/Register";
 
 const Consultancy = () => {
   useEffect(() => {
@@ -40,7 +41,7 @@ const Consultancy = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Consultancy Form */}
             <div>
-              <RegistrationForm />
+              <ConsultancyForm />
             </div>
 
             {/* Information Section */}

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, {  useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
-const Register = () => {
+const RegisterForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -9,6 +9,11 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const navigate = useNavigate();
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,7 +67,6 @@ const Register = () => {
   };
 
   console.log("Errors:", errors)
-
   return (
     <>
       <div className="registerContainer min-h-screen flex justify-center items-center p-4 bg-[url('src/assets/bg.jpg')] bg-cover bg-no-repeat bg-center">
@@ -212,6 +216,13 @@ const Register = () => {
                 hover:bg-yellow-500 active:bg-yellow-300 active:border border-yellow-600 cursor-pointer' />
             </div>
 
+            {/* Already have an account? */}
+            <div className="text-center pt-2">
+              <p className='text-gray-900 text-xs'>
+                Already have an account? <a href="#" className='text-yellow-400 hover:text-yellow-600 focus:text-white transition-colors duration-200' onClick={() => handleNavigate('/login')}>Sign In</a>
+              </p>
+            </div>
+
             {/* Links */}
             <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 pt-2 text-xs">
               <a href="#" className='text-yellow-400 hover:text-yellow-600 focus:text-white transition-colors duration-200'>
@@ -228,4 +239,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default RegisterForm

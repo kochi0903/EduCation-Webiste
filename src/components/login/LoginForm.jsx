@@ -8,7 +8,7 @@ const LoginForm = () => {
 
     // Define the inline styles for the background image as a JavaScript object
     const backgroundStyle = {
-        backgroundImage: 'url("https://cdn.wallpapersafari.com/48/65/oynO57.jpg")',
+        backgroundImage: 'url("https://mcdn.wallpapersafari.com/medium/2/20/7AgUfNc.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -44,7 +44,7 @@ const LoginForm = () => {
                 `}
             </style>
 
-            <div className="flex items-center justify-center min-h-screen w-full" style={backgroundStyle}>
+            <div className="flex items-center justify-end min-h-screen w-full pr-8 md:pr-16" style={backgroundStyle}>
                 {/* Login Form Container - Added animate-fadeIn class controlled by showForm state */}
                 <div className={`bg-white bg-opacity-30 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl w-11/12 max-w-md border border-white border-opacity-40 transition-opacity transform ${showForm ? 'animate-fadeIn' : 'opacity-0'}`}>
                     {/* Changed title to match reference image and increased font size/weight */}

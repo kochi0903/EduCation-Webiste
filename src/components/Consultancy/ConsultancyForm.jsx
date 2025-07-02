@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Button from "../ui/Button";
 
-const RegistrationForm = () => {
+const ConsultancyForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -247,4 +247,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default ConsultancyForm;

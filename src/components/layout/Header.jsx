@@ -63,8 +63,35 @@ const Header = () => {
           <NavLink to="/courses" className={navLinkClasses}>
             Courses
           </NavLink>
-          <NavLink to="/register" className="btn-primary ml-4">
+          <NavLink to="/register" className="px-3 py-3
+      bg-transparent
+      border-2 border-yellow-500
+      text-yellow-500
+      font-semibold
+      rounded-full
+      hover:bg-yellow-500
+      hover:text-white
+      transition-colors
+      duration-300
+      shadow-md hover:shadow-lg
+      focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50
+      inline-flex items-center justify-center
+      min-w-[150px] ">
             Register Now
+          </NavLink>
+          <NavLink to="/login" className="px-6 py-3
+      bg-yellow-500
+      text-white
+      font-semibold
+      rounded-full
+      hover:bg-yellow-600
+      transition-colors
+      duration-300
+      shadow-md hover:shadow-lg
+      focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50
+      inline-flex items-center justify-center
+      min-w-[100px]">
+            Login
           </NavLink>
         </nav>
 
@@ -135,6 +162,13 @@ const Header = () => {
               onClick={closeMenu}
             >
               Register Now
+            </NavLink>
+            <NavLink
+              to="/login"
+              className="btn-primary mt-4 text-center"
+              onClick={closeMenu}
+            >
+              Login
             </NavLink>
           </nav>
         </div>
