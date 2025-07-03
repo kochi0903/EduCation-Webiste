@@ -11,6 +11,7 @@ import CourseDetails from "./pages/CourseDetail";
 import Consultancy from "./pages/Consultancy";
 import Register from "./pages/Register";
 import LoginForm from "./pages/Login";
+import AdminPanel from "./components/admin/AdminPanel";
 
 
 export default function App() {
