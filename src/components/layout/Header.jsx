@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaListUl } from "react-icons/fa";
-import Eduruz from "../../assets/Eduruz.png";
+import Eduruz from "../../assets/Eduruz.png"; // Ensure this path is correct
 import { MdClose } from "react-icons/md";
 
 const Header = () => {
@@ -29,21 +29,28 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const headerClasses = `fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-subtle py-2" : "bg-white py-2" //bg-transparent py-2
-    }`;
+  const headerClasses = `fixed w-full z-50 transition-all duration-300 ${
+    isScrolled ? "bg-white shadow-subtle py-2" : "bg-white py-2"
+  }`;
 
   const navLinkClasses = ({ isActive }) =>
     `relative px-3 py-2 text-lg font-medium transition-colors duration-200
-    ${isActive
-      ? "text-primary-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-500"
-      : "text-primary-700 hover:text-primary-600"
+    ${
+      isActive
+        ? "text-primary-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-500"
+        : "text-primary-700 hover:text-primary-600"
     }`;
+
+  // Common button classes for both Login and Register
+  const buttonClasses = `px-6 py-2 rounded-full font-semibold transition-all duration-300 ease-in-out
+                         flex justify-center items-center text-center whitespace-nowrap`;
 
   return (
     <header className={headerClasses}>
-      <div className="container flex items-center justify-between">
+      {/* Increased max-width for the header content container */}
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center" onClick={closeMenu}>
-          <img src={Eduruz} style={{ width: 75, height: 50 }} />
+          <img src={Eduruz} alt="Eduruz Logo" style={{ width: 75, height: 50 }} />
           <span className="ml-2 text-xl font-bold" style={{ color: "#1E293B" }}>
             Edu
           </span>
@@ -63,8 +70,16 @@ const Header = () => {
           <NavLink to="/courses" className={navLinkClasses}>
             Courses
           </NavLink>
-          <NavLink to="/register" className="btn-primary ml-4">
+          {/* Register Button */}
+          <NavLink to="/register" className={`${buttonClasses} bg-yellow-400 text-gray-900 hover:bg-yellow-500 ml-4`}>
             Register Now
+          </NavLink>
+          {/* Login Button - Now to the right of Register, with yellow border */}
+          <NavLink
+            to="/login"
+            className={`${buttonClasses} bg-gray-200 text-gray-800 hover:bg-gray-300 border-2 border-yellow-400 hover:border-yellow-500 ml-2`}
+          >
+            Login
           </NavLink>
         </nav>
 
@@ -79,8 +94,9 @@ const Header = () => {
 
         {/* Mobile Nav */}
         <div
-          className={`fixed top-0 right-0 bottom-0 w-64 bg-white shadow-elevated z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
-            } md:hidden`}
+          className={`fixed top-0 right-0 bottom-0 w-64 bg-white shadow-elevated z-50 transform transition-transform duration-300 ease-in-out ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          } md:hidden`}
         >
           <div className="flex justify-end p-4">
             <button
@@ -95,9 +111,10 @@ const Header = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `px-4 py-3 mb-2 rounded-md ${isActive
-                  ? "bg-primary-100 text-primary-700"
-                  : "text-neutral-700 hover:bg-neutral-100"
+                `px-4 py-3 mb-2 rounded-md ${
+                  isActive
+                    ? "bg-primary-100 text-primary-700"
+                    : "text-neutral-700 hover:bg-neutral-100"
                 }`
               }
               onClick={closeMenu}
@@ -108,9 +125,10 @@ const Header = () => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                `px-4 py-3 mb-2 rounded-md ${isActive
-                  ? "bg-primary-100 text-primary-700"
-                  : "text-neutral-700 hover:bg-neutral-100"
+                `px-4 py-3 mb-2 rounded-md ${
+                  isActive
+                    ? "bg-primary-100 text-primary-700"
+                    : "text-neutral-700 hover:bg-neutral-100"
                 }`
               }
               onClick={closeMenu}
@@ -120,21 +138,31 @@ const Header = () => {
             <NavLink
               to="/courses"
               className={({ isActive }) =>
-                `px-4 py-3 mb-2 rounded-md ${isActive
-                  ? "bg-primary-100 text-primary-700"
-                  : "text-neutral-700 hover:bg-neutral-100"
+                `px-4 py-3 mb-2 rounded-md ${
+                  isActive
+                    ? "bg-primary-100 text-primary-700"
+                    : "text-neutral-700 hover:bg-neutral-100"
                 }`
               }
               onClick={closeMenu}
             >
               Courses
             </NavLink>
+            {/* Mobile Register Button */}
             <NavLink
               to="/register"
-              className="btn-primary mt-4 text-center"
+              className={`${buttonClasses} bg-yellow-400 text-gray-900 hover:bg-yellow-500 mt-4 mb-2`}
               onClick={closeMenu}
             >
               Register Now
+            </NavLink>
+            {/* Mobile Login Button - Now below Register, with yellow border */}
+            <NavLink
+              to="/login"
+              className={`${buttonClasses} bg-gray-200 text-gray-800 hover:bg-gray-300 border-2 border-yellow-400 hover:border-yellow-500`}
+              onClick={closeMenu}
+            >
+              Login
             </NavLink>
           </nav>
         </div>
