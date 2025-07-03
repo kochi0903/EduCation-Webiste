@@ -1,19 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast'; 
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors]= useState({}); // Changed to object for multiple errors
-    const [message, setMessage]=useState('');
+    const [errors, setErrors]= useState({}); 
     const [loading,setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const BASE_URL = 'http://localhost:3000/api';
 
-    // State to control the fade-in animation
+   
     const [showForm, setShowForm] = useState(false);
 
     // Define the inline styles for the background image as a JavaScript object
@@ -41,7 +41,6 @@ const LoginForm = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         const newErrors= {};
-        setMessage('');
         setLoading(true);
 
         if(!email.trim()){
@@ -68,7 +67,7 @@ const LoginForm = () => {
                 });
 
                 console.log("Login Succesful: ",response.data);
-                setMessage(response.data.message|| "Login Successful!");
+                toast.success(response.data.message || "Login Successful!"); 
 
                 setEmail('');
                 setPassword('');
@@ -76,20 +75,21 @@ const LoginForm = () => {
 
                 setTimeout(()=>{
                     navigate('/'); //mainpage route when ready
-                },2000);
+                },500);
 
             } catch (error) {
                 console.error("Login Error: ",error);
+                let errorMessage = "An unexpected error occured during login.";
                 if(error.response && error.response.data && error.response.data.message){
-                    setMessage(`Error : ${error.response.data.message}`);
-                }else{
-                    setMessage("An unexpected error occured during login.");
+                    errorMessage = `Error : ${error.response.data.message}`;
                 }
+                toast.error(errorMessage); 
             } finally{
                 setLoading(false);
             }
         }else{
             setLoading(false);
+            toast.error("Please correct the form errors.");
         }
     };
 
@@ -122,12 +122,6 @@ const LoginForm = () => {
                     {/* Changed title to match reference image and increased font size/weight */}
                     <h2 className="text-3xl md:text-3xl font-bold text-gray-900 mb-8 text-center drop-shadow-lg">Login To Continue</h2>
 
-                    {/* General Message */}
-                    {message && (
-                        <p className={`text-center font-semibold ${message.startsWith('Error')? 'text-red-700' : 'text-green-600'} text-sm mb-4`}>
-                        {message}
-                        </p>
-                    )}
 
                     <form onSubmit={handleSubmit}>
                         <div className="mb-6">
@@ -175,4 +169,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default LoginForm;
