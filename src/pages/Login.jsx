@@ -1,24 +1,24 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors]= useState('');
+    const [errors, setErrors]= useState({}); // Changed to object for multiple errors
     const [message, setMessage]=useState('');
     const [loading,setLoading] = useState(false);
 
     const navigate = useNavigate();
 
-     const BASE_URL = 'http://localhost:3000/api';
+    const BASE_URL = 'http://localhost:3000/api';
 
     // State to control the fade-in animation
     const [showForm, setShowForm] = useState(false);
 
     // Define the inline styles for the background image as a JavaScript object
     const backgroundStyle = {
-        backgroundImage: 'url("https://cdn.wallpapersafari.com/48/65/oynO57.jpg")',
+        backgroundImage: 'url("src/assets/login.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -110,13 +110,19 @@ const LoginForm = () => {
                 `}
             </style>
 
-            <div className="flex items-center justify-center min-h-screen w-full" style={backgroundStyle}>
-                {/* Login Form Container - Added animate-fadeIn class controlled by showForm state */}
-                <div className={`bg-white bg-opacity-30 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl w-11/12 max-w-md border border-white border-opacity-40 transition-opacity transform ${showForm ? 'animate-fadeIn' : 'opacity-0'}`}>
+            {/* Main container for the login page layout */}
+            <div className="loginContainer min-h-screen flex justify-center items-center p-4" style={backgroundStyle}>
+                {/* Left side - hidden on mobile, takes up space on large screens */}
+                <div className="hidden lg:flex lg:w-1/2 lg:h-[35rem] justify-center items-center">
+                    {/* You can add content here if needed, or leave it for spacing */}
+                </div>
+
+                {/* Right side - Login form container */}
+                <div className={`w-full max-w-md lg:w-[30rem] bg-white bg-opacity-30 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl border border-white border-opacity-40 transition-opacity transform ${showForm ? 'animate-fadeIn' : 'opacity-0'}`}>
                     {/* Changed title to match reference image and increased font size/weight */}
                     <h2 className="text-3xl md:text-3xl font-bold text-gray-900 mb-8 text-center drop-shadow-lg">Login To Continue</h2>
 
-                    {/* {General Message} */}
+                    {/* General Message */}
                     {message && (
                         <p className={`text-center font-semibold ${message.startsWith('Error')? 'text-red-700' : 'text-green-600'} text-sm mb-4`}>
                         {message}
@@ -132,7 +138,7 @@ const LoginForm = () => {
                              placeholder="user@example.com"
                              className="w-full px-4 py-3 rounded-lg bg-gray-100 bg-opacity-70 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-900 placeholder-gray-600 transition duration-300 ease-in-out hover:shadow-lg hover:scale-[1.005]"
                              value={email}
-                             onChange={(e)=>setEmail(e.target.value)}  
+                             onChange={(e)=>setEmail(e.target.value)}
                              required />
                              {errors.email && <p className='text-red-500 text-xs mt-1'>{errors.email}</p>}
                         </div>
@@ -159,7 +165,7 @@ const LoginForm = () => {
                         <a href="#" className="text-gray-900 hover:underline text-sm font-medium transition duration-300 ease-in-out drop-shadow-sm hover:text-yellow-600">Forgot Password?</a>
                     </div>
                     <div className="mt-4 text-center">
-                        <p className="text-gray-900 text-sm drop-shadow-sm">Already have an account?
+                        <p className="text-gray-900 text-sm drop-shadow-sm">Don't have an account?
                             <a href="#" className="text-yellow-400 hover:underline font-medium transition duration-300 ease-in-out hover:text-yellow-500" onClick={() => handleNavigate('/register')}> Sign Up</a>
                         </p>
                     </div>
