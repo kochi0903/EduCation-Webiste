@@ -14,6 +14,7 @@ const Register = () => {
     const [message, setMessage] = useState('');
     const [showOtpModal, setShowOtpModal]= useState(false);
     const [otpEmail, setOtpEmail] = useState('');
+    const [loading,setLoading] = useState(false)
 
     const navigate= useNavigate();
 
@@ -23,6 +24,7 @@ const Register = () => {
         e.preventDefault();
         const newErrors = {};
         setMessage('');
+        setLoading(true);
 
         if (!firstName.trim()) {
             newErrors.firstName = 'First name is required'
@@ -92,8 +94,12 @@ const Register = () => {
                 }else{
                     setMessage("An unexpected error occured during registration.");
                 }
+            } finally{
+                setLoading(false);
             }
 
+        }else{
+            setLoading(false);
         }
     };
 
@@ -260,9 +266,9 @@ const Register = () => {
                         <div className="flex justify-center pt-2">
                             <input
                                 type="submit"
-                                value="Sign Up"
+                                value={loading ? 'Signing Up...' : 'Sign Up'}
                                 className='w-full sm:w-60 h-10 bg-yellow-400 flex justify-center items-center rounded-full font-semibold
-                hover:bg-yellow-500 active:bg-yellow-300 active:border border-yellow-600 cursor-pointer' />
+                hover:bg-yellow-500 active:bg-yellow-300 active:border border-yellow-600 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed' disabled= {loading}/>
                         </div>
 
                         {/* Links */}
